@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getEvent } from "../../api/events.api";
+import { getEvent, createEvent, updateEvent } from "../../api/events.api";
 import MenuView from "./menu.view"
 import { useNavigate } from 'react-router-dom';
 
@@ -46,17 +46,19 @@ export default function MenuContainer() {
             if (formData.id) {
                 await updateEvent(formData.id, eventData);
             } else {
+                console.log("formData", formData)
+                console.log("eventdata", eventData)
                 await createEvent(eventData);
             }
 
-            const [formData, setFormData] = useState({
+            setFormData({
                 applicationId: "ede06343-0bda-4d3e-bc5a-49b7664b83ca",
                 name: "",
                 date: "",
                 image: "string",
                 price: 0,
                 location: ""
-            });
+            })
             await loadData();
         } catch (error) {
             console.error("Error submitting events:", error.message);

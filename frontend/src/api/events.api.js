@@ -40,3 +40,13 @@ export const createEvent = async (event) => {
         throw new Error("Failed to create event. Please check your data.");
     }
 };
+
+export const updateEvent = async (id, event) => {
+    try {
+        const response = await axios.put(`${API_URL}/${id}`, event);
+        return response.data;
+    } catch (error) {
+        console.error("Error updating event:", error.message);
+        throw new Error("Failed to update event. Please try again.");
+    }
+};
