@@ -5,6 +5,12 @@ const getEvents = async (req, res) => {
     res.json(events)
 }
 
+const getEventById = async (req, res) => {
+    const event = await Events.getEventById(req.params.id);
+    if (!event) return res.status(404).json({ error: 'Event not found' });
+    res.json(event);
+};
+
 const createEvent = async (req, res) => {
     const id = await Events.createEvent(req.body);
     res.status(201).json({ id });
@@ -12,5 +18,6 @@ const createEvent = async (req, res) => {
 
 module.exports = {
     createEvent,
-    getEvents
+    getEvents,
+    getEventById
 }
