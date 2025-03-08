@@ -11,6 +11,22 @@ export const getEvent = async () => {
         })
         return response.data
     } catch (error) {
+        console.error("Error fetching events:", error);
+        throw error;
+    }
+}
 
+export const getEventById = async (id) => {
+    try {
+        const response = await axios.get(`${API_URL}/${id}`, {
+            params: {
+                applicationId: "ede06343-0bda-4d3e-bc5a-49b7664b83ca",
+                eventId: id
+            }
+        })
+        return response.data
+    } catch (error) {
+        console.error("Error fetching event:", error);
+        throw error;
     }
 }
