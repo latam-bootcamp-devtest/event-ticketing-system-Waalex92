@@ -1,15 +1,54 @@
 import Button from "../../components/Button"
+import InputField from "../../components/InputField"
 
 export default function MenuView({
     data,
+    formData,
     handleGoBack,
+    handleSubmit,
+    handleChange
 }) {
     return (
         <div className="">
-            <div className="space-x-2">
-                <Button text="Create Event" onClick={() => console.log("create event")} className="bg-green-500 hover:bg-green-600" />
+            <div className="space-x-2 flex place-content-end">
                 <Button text="Go Back" onClick={() => handleGoBack()} className="bg-blue-500 hover:bg-blue-600" />
             </div>
+            <h1 className="text-2xl font-bold mb-6 text-gray-800 text-center">Events</h1>
+
+            <form onSubmit={handleSubmit} className="mb-6 p-4 bg-gray-100 rounded-lg shadow-md">
+                <div className="grid grid-cols-1 gap-4">
+                    <InputField type="text"
+                        name="name"
+                        placeholder="Event Name"
+                        value={formData.name}
+                        onChange={handleChange} />
+                    <InputField
+                        type="date"
+                        name="date"
+                        placeholder="Date"
+                        value={formData.date}
+                        onChange={handleChange}
+                        min="0"
+                        step="0.01"
+                    />
+                    <InputField type="text"
+                        name="image"
+                        placeholder="Image"
+                        value={formData.image}
+                        onChange={handleChange} />
+                    <InputField type="number"
+                        name="price"
+                        placeholder="Price"
+                        value={formData.price}
+                        onChange={handleChange} />
+                    <InputField type="text"
+                        name="location"
+                        placeholder="Location"
+                        value={formData.location}
+                        onChange={handleChange} />
+                    <Button type="submit" text={formData.id ? "Update Event" : "Add Event"} className="bg-green-500 hover:bg-green-600" />
+                </div>
+            </form>
             <ul className="space-y-4 flex flex-row justify-between">
                 {data.length > 0 ? (
                     data.map((data) => (

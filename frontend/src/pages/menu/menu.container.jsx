@@ -7,6 +7,14 @@ import { useNavigate } from 'react-router-dom';
 export default function MenuContainer() {
     const navigate = useNavigate();
     const [data, setData] = useState([]);
+    const [formData, setFormData] = useState({
+        applicationId: "ede06343-0bda-4d3e-bc5a-49b7664b83ca",
+        name: "",
+        date: "",
+        image: "string",
+        price: 0,
+        location: ""
+    });
 
     const handleGoBack = () => {
         navigate(-1)
@@ -25,10 +33,43 @@ export default function MenuContainer() {
         }
     };
 
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const { eventData } = formData;
+            if (formData.id) {
+                await updateEvent(formData.id, eventData);
+            } else {
+                await createEvent(eventData);
+            }
+
+            const [formData, setFormData] = useState({
+                applicationId: "ede06343-0bda-4d3e-bc5a-49b7664b83ca",
+                name: "",
+                date: "",
+                image: "string",
+                price: 0,
+                location: ""
+            });
+            await loadData();
+        } catch (error) {
+            console.error("Error submitting events:", error.message);
+        }
+    };
+
     return (
         <MenuView
             data={data}
+            formData={formData}
             handleGoBack={handleGoBack}
+            handleSubmit={handleSubmit}
+            handleChange={handleChange}
         />
     )
 }
