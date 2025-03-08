@@ -1,14 +1,14 @@
 import Button from "../../components/Button"
 
-export default function EventView({
+export default function MenuView({
     data,
-    getDetails,
-    handleGoToMenu,
+    handleGoBack,
 }) {
     return (
         <div className="">
-            <div>
-                <Button text="Event Management Panel" onClick={() => handleGoToMenu()} className="bg-green-500 hover:bg-blue-600" />
+            <div className="space-x-2">
+                <Button text="Create Event" onClick={() => console.log("create event")} className="bg-green-500 hover:bg-green-600" />
+                <Button text="Go Back" onClick={() => handleGoBack()} className="bg-blue-500 hover:bg-blue-600" />
             </div>
             <ul className="space-y-4 flex flex-row justify-between">
                 {data.length > 0 ? (
@@ -20,8 +20,9 @@ export default function EventView({
                                 <p className="text-gray-600">Date: {Date(data.date)}</p>
                                 <p className="text-gray-600">Price: {data.price}</p>
                             </div>
-                            <div>
-                                <Button text="See Details" onClick={() => getDetails(data.id)} className="bg-blue-500 hover:bg-blue-600" />
+                            <div className="space-x-2">
+                                <Button text="Edit" onClick={() => console.log("edit")} className="bg-yellow-500 hover:bg-yellow-600" />
+                                <Button text="Delete" onClick={() => console.log("delete")} className="bg-red-500 hover:bg-red-600" />
                             </div>
                         </li>
                     ))

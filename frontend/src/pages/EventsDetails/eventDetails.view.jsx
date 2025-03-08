@@ -1,11 +1,10 @@
 import Button from "../../components/Button"
-import { useNavigate } from "react-router-dom";
 
 
 export default function EventView({
-    data
+    data,
+    handleGoBack
 }) {
-    const navigate = useNavigate();
     return (
         <div className="flex flex-row justify-center items-center">
             <ul className="space-y-4">
@@ -23,8 +22,7 @@ export default function EventView({
 
                     </div>
                     <div>
-                        <Button text="Go back" onClick={() => navigate(-1)} className="bg-blue-500 hover:bg-blue-600" />
-
+                        <Button text="Go back" onClick={() => handleGoBack()} className="bg-blue-500 hover:bg-blue-600" />
                     </div>
                 </li>
             </ul>
